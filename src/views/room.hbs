@@ -1,0 +1,31 @@
+ <div class="block-panel">
+      <button class="btn btn-default" id="signout">SignOut</button>
+      <h2 class="block-panel-heading">{{name}}</h2>
+      
+      <div class="panel panel-default">
+        <div class="panel-body chat-body">
+          {{#each messages}}
+          <span class="message"><span class="user" style="color: #{{userColor}}">{{userName}}</span> {{messageText}}</span>
+          {{#if file}}
+          <a href="/files/{{file}}" target=”_blank”>attached file</a>
+          {{/if}}
+        {{/each}}
+        </div>
+        <div class="row message-input">
+        <div class="col-lg-12">
+            <div class="field">         
+            <input type="file" accept=".jpg, .jpeg, .png" id="file" name="file" />
+            </div>
+            <div class="input-group">
+            <span class="input-group-btn">
+              <button id="sendMessage" class="btn btn-default">Send</button>
+            </span> 
+            <input type="text" id='messageText' name="messageText" class="form-control">
+            </div id='validation'>
+              <p class="validation"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> 
+    </div>
