@@ -27,7 +27,7 @@ const loginUser = async (req, res, next) => {
     return res.send({ error: 'invalid email or password' });
   }
 
-  const validPassword = bcrypt.compareSync(req.body.password, user.password);
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
 
   if (!validPassword) {
     return res.send({ error: 'invalid email or password' });

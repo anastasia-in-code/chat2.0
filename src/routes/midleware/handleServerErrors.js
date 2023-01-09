@@ -6,8 +6,8 @@ const { logger } = require('../../helpers/logger');
  * @param {object} res - response object
  * @param {function} next - next function returns next midleware
  */
-const handleServerErrors = (err, req, res, next) => {
-  logger.error(err);
+const handleServerErrors = (error, req, res, next) => {
+  logger.error(error);
 
   return res.status(502).send('Sorry, something went wrong(((((');
 };

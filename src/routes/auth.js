@@ -2,7 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const { signUpPage, registerNewUser } = require('./controllers/signupController');
 const { signInPage, loginUser } = require('./controllers/signinController');
-const { asyncWrapper } = require('../helpers/asyncWrapper');
+const { asyncWrapper } = require('./midleware/asyncWrapper')
+
 
 const router = express.Router();
 
@@ -13,15 +14,15 @@ router.get('/signup', signUpPage);
 router.post(
   '/signup',
   upload.single('file'),
-  asyncWrapper(registerNewUser),
+  asyncWrapper(registerNewUser)
 );
 
-router.get('/signin', signInPage);
+router.get('/signin', asyncWrapper(signInPage));
 
 router.post(
   '/signin',
   upload.single('file'),
-  asyncWrapper(loginUser),
+  asyncWrapper(loginUser)
 );
 
 router.post('/signout', (req, res) => {

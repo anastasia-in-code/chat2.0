@@ -14,7 +14,10 @@ const authRequired = (req, res, next) => {
     return res.redirect('/signin');
   }
 
-  const tokenValue = token.split('=')[1].split(';')[0];
+  const tokenValue = token.split(';').find(cookie => {
+    return cookie.includes('Authorization')
+  }).split('=')[1]
+
   let decoded = '';
   try {
     decoded = jwt.verify(tokenValue, config.secretKey);

@@ -3,11 +3,10 @@ const multer = require('multer');
 const { roomPage, sendMessage, attachedFile } = require('./controllers/roomController');
 const { authRequired } = require('./midleware/authRequired');
 const { newMessageValidation} = require('./midleware/newMassageValidation')
+const { asyncWrapper } = require('./midleware/asyncWrapper')
 
 const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
-
-const { asyncWrapper } = require('../helpers/asyncWrapper');
 
 router.get(
   '/lobby/:roomId',
@@ -20,7 +19,7 @@ router.post(
   upload.single('file'),
   authRequired,
   newMessageValidation,
-  asyncWrapper(sendMessage),
+  asyncWrapper(sendMessage)
 );
 
 router.get(
